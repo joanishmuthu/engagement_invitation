@@ -1,4 +1,4 @@
-// Random floating emoji positions
+// Random emoji animation
 const emojis = document.querySelectorAll('.emoji');
 emojis.forEach((emoji) => {
   emoji.style.left = Math.random() * 100 + 'vw';
