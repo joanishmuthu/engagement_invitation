@@ -1,4 +1,4 @@
-/* Reset and full-screen setup */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ html, body {
   background-color: black;
 }
 
-/* Fullscreen background video */
+/* Video background setup */
 #bg-video {
   position: fixed;
   top: 0;
@@ -21,30 +21,29 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
-  border: none;
-  outline: none;
+  z-index: 0;  /* Ensures it's visible */
 }
 
-/* Bottom bar for button */
+/* Bottom bar */
 .bottom-bar {
   position: fixed;
   bottom: 20px;
   left: 0;
   width: 100%;
   text-align: center;
+  z-index: 1; /* Above video */
 }
 
-/* Professional button design */
+/* Clean professional button */
 .map-btn {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 12px 30px;
   background-color: #0052cc;
-  color: #fff;
+  color: white;
   text-decoration: none;
   border-radius: 30px;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 16px;
   transition: background 0.3s ease;
 }
 
