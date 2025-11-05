@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Engagement Invitation - Joanish & Berisha</title>
+  <title>Engagement Invitation - Joani0sh & Berisha</title>
   <style>
-    /* General page styling */
+    /* General styling */
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #f9f9f9, #f1f4ff);
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -16,7 +16,7 @@
       min-height: 100vh;
       margin: 0;
       padding: 20px;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     /* Fade and slide animation */
@@ -32,6 +32,7 @@
     }
 
     .card {
+      position: relative;
       background-color: #fff;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -42,13 +43,61 @@
       animation: fadeSlideUp 1s ease forwards;
     }
 
-    .card img {
+    .card video {
       width: 100%;
       height: auto;
       display: block;
+      border: none;
       animation: fadeSlideUp 1.2s ease forwards;
     }
 
+    /* Floating emojis animation */
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-20px) rotate(15deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+    }
+
+    /* Specific emoji placements */
+    .emoji-ring {
+      top: -20px;
+      left: 20px;
+      animation-delay: 0s;
+    }
+    .emoji-heart {
+      top: 10px;
+      right: 30px;
+      animation-delay: 1s;
+    }
+    .emoji-sparkle {
+      bottom: 20px;
+      left: 40px;
+      animation-delay: 2s;
+    }
+    .emoji-champagne {
+      bottom: 30px;
+      right: 20px;
+      animation-delay: 3s;
+    }
+
+    /* Map link styling */
     .map-link {
       display: inline-block;
       margin: 25px auto;
@@ -82,25 +131,29 @@
       body {
         padding: 10px;
       }
-
-      .card {
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      }
-
       .map-link {
         font-size: 0.95rem;
         padding: 10px 24px;
+      }
+      .emoji {
+        font-size: 1.6rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <img
-      src="engagement.jpg"
-      alt="Engagement Invitation"
-    />
+    <!-- Floating engagement emojis -->
+    <div class="emoji emoji-ring">💍</div>
+    <div class="emoji emoji-heart">❤️</div>
+    <div class="emoji emoji-sparkle">✨</div>
+    <div class="emoji emoji-champagne">🥂</div>
+
+    <!-- Engagement video -->
+    <video autoplay muted loop playsinline controls>
+      <source src="engagement_video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <a
@@ -111,9 +164,5 @@
   >
     📍 View Location on Google Maps
   </a>
-
-  <footer>
-    Made with 💙 for Joanish & Berisha
-  </footer>
 </body>
 </html>
