@@ -5,22 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Engagement Invitation</title>
   <style>
-    /* Reset and base styling */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
 
     html, body {
       height: 100%;
-      overflow: hidden;
       font-family: "Poppins", sans-serif;
       background-color: black;
+      overflow: auto;
     }
 
-    /* Fullscreen video background */
     video {
       position: fixed;
       top: 0;
@@ -28,19 +25,18 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;
+      z-index: 0;
     }
 
-    /* Bottom button container */
     .button-container {
       position: fixed;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
+      z-index: 1;
     }
 
-    /* Get Direction button */
     .btn {
       background-color: rgba(255, 255, 255, 0.85);
       color: #000;
@@ -60,7 +56,6 @@
       transform: scale(1.05);
     }
 
-    /* Responsive for mobile */
     @media (max-width: 600px) {
       .btn {
         font-size: 1rem;
@@ -71,19 +66,16 @@
 </head>
 <body>
 
-  <!-- Background video -->
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline preload="auto">
     <source src="engagement_video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  <!-- Get Direction Button -->
   <div class="button-container">
-    <a 
-      class="btn" 
-      href="https://maps.app.goo.gl/JJgTrtpMezjbQPsL9?g_st=aw" 
-      target="_blank"
-    >
+    <a class="btn" 
+       href="https://maps.app.goo.gl/JJgTrtpMezjbQPsL9?g_st=aw" 
+       target="_blank"
+       aria-label="Open map for directions">
       Get Direction 📍
     </a>
   </div>
