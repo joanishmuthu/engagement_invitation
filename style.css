@@ -10,105 +10,63 @@ body, html {
   font-family: "Poppins", sans-serif;
 }
 
-/* ✅ Video background properly positioned */
+/* ✅ Video background fills the screen */
 #bg-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ensures full coverage */
-  z-index: -2; /* behind everything */
+  object-fit: cover;
+  z-index: -2;
 }
 
-/* ✅ Overlay for better text contrast */
-.overlay {
+/* Optional: soft overlay tint for a cinematic look */
+body::before {
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: radial-gradient(rgba(255, 192, 203, 0.1), rgba(0, 0, 0, 0.3));
   z-index: -1;
 }
 
-/* ✅ Main content */
-.content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  top: 35%;
-  color: #fff;
-  animation: fadeIn 2s ease-in-out;
-}
-
-h1 {
-  font-size: 2.8em;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-  animation: glow 2s infinite alternate;
-}
-
-p {
-  font-size: 1.2em;
-  margin-top: 10px;
-}
-
-.map-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 25px;
-  background-color: #ff66b2;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: bold;
-  transition: 0.3s ease;
-}
-
-.map-btn:hover {
-  background-color: #ff4081;
-  transform: scale(1.05);
-}
-
-/* ✅ Floating Emojis */
+/* Floating emojis container */
 .emojis {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
 }
 
+/* Emoji animation */
 .emoji {
   position: absolute;
-  font-size: 2em;
-  animation: float 6s ease-in-out infinite;
+  font-size: 2.5em;
   opacity: 0.9;
+  animation: float 8s ease-in-out infinite;
 }
 
-/* Animations */
+/* Floating animation */
 @keyframes float {
   0% {
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(110vh) rotate(0deg);
     opacity: 0;
   }
-  50% {
+  25% {
+    opacity: 1;
+  }
+  75% {
     opacity: 1;
   }
   100% {
     transform: translateY(-10vh) rotate(360deg);
     opacity: 0;
   }
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #ff66b2; }
-  to { text-shadow: 0 0 25px #fff; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
 }
