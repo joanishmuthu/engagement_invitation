@@ -4,20 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Engagement Invitation</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Reset and base styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+      background-color: black;
+    }
+
+    /* Fullscreen video background */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Bottom button container */
+    .button-container {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    /* Get Direction button */
+    .btn {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn:hover {
+      background-color: #000;
+      color: #fff;
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
+      transform: scale(1.05);
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 600px) {
+      .btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline id="bg-video">
+
+  <!-- Background video -->
+  <video autoplay muted loop playsinline>
     <source src="engagement_video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  <div class="bottom-bar">
-    <a href="https://maps.app.goo.gl/JJgTrtpMezjbQPsL9?g_st=aw" 
-       target="_blank" 
-       class="map-btn">
-      Get Directions
+  <!-- Get Direction Button -->
+  <div class="button-container">
+    <a 
+      class="btn" 
+      href="https://www.google.com/maps?q=8/43A,+Thiruvattar+-+Colachel+Rd,+near+Nangil+Milk+Plant,+Kaduvetty,+Mulagumoodu,+Thiruvithamcode,+Tamil+Nadu+629167" 
+      target="_blank"
+    >
+      Get Direction 📍
     </a>
   </div>
+
 </body>
 </html>
