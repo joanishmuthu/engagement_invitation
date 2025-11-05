@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engagement Invitation - Joanis & Berisha</title>
+  <style>
+    /* General page styling */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #f1f4ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Fade and slide animation */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: fadeSlideUp 1s ease forwards;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      animation: fadeSlideUp 1.2s ease forwards;
+    }
+
+    .map-link {
+      display: inline-block;
+      margin: 25px auto;
+      padding: 12px 28px;
+      background-color: #4a6cf7;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      animation: fadeSlideUp 1.4s ease forwards;
+    }
+
+    .map-link:hover {
+      background-color: #3a56c5;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(58, 86, 197, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 15px;
+      color: #666;
+      font-size: 0.9rem;
+      animation: fadeSlideUp 1.6s ease forwards;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .card {
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .map-link {
+        font-size: 0.95rem;
+        padding: 10px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img
+      src="Blue Pink and White Watercolor Floral Engagement Invitation.jpg"
+      alt="Engagement Invitation"
+    />
+  </div>
+
+  <a
+    class="map-link"
+    href="https://maps.app.goo.gl/JJgTrtpMezjbQPsL9?g_st=aw"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    📍 View Location on Google Maps
+  </a>
+
+  <footer>
+    Made with 💙 for Joanis & Berisha
+  </footer>
+</body>
+</html>
