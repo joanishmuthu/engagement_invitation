@@ -20,8 +20,8 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       background: black;
+      overflow: hidden;
     }
 
     video {
@@ -41,44 +41,30 @@
       touch-action: manipulation;
     }
 
+    /* BUTTON (same size everywhere) */
     #locationBtn {
       position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 99999;
-      background: rgba(255,255,255,0.95);
-      border-radius: 20px;
-      padding: 26px 48px;
-      font-size: 32px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 18px;
+      padding: 20px 38px;
+      font-size: 26px;
       font-family: sans-serif;
+      font-weight: bold;
       color: black;
       border: none;
-      font-weight: 700;
       cursor: pointer;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(4px);
       animation: pulse 1.8s infinite ease-in-out;
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.12); }
-      100% { transform: scale(1); }
-    }
-
-    /* Full center on mobile */
-    @media(max-width:820px){
-      #locationBtn {
-        top:50%;
-        left:50%;
-        transform:translate(-50%, -50%);
-      }
-    }
-
-    /* Desktop = bottom corner */
-    @media(min-width:821px){
-      #locationBtn {
-        bottom:30px;
-        right:30px;
-        transform:none;
-      }
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.08); }
+      100% { transform: translate(-50%, -50%) scale(1); }
     }
 
   </style>
@@ -87,7 +73,7 @@
 <body>
 
   <div id="videoContainer">
-    <video id="video" playsinline preload="auto" loop>
+    <video id="video" preload="auto" playsinline loop>
       <source src="engagement_video.mp4" type="video/mp4">
     </video>
   </div>
@@ -100,35 +86,32 @@ const tapLayer = document.getElementById("tapLayer");
 const video = document.getElementById("video");
 const locationBtn = document.getElementById("locationBtn");
 
-// silent unlock audio (Base64 inline)
-const unlockAudio = new Audio("data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA//////////8AAAAA");
-
-function isMobile(){
-  return /Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth<=820;
+function isMobile() {
+  return /Android|iPhone|iPad/i.test(navigator.userAgent) 
+         || window.innerWidth <= 820;
 }
 
-function applyFit(){
-  video.style.objectFit = isMobile() ? "cover":"contain";
+function applyFit() {
+  video.style.objectFit = isMobile() ? "cover" : "contain";
 }
 applyFit();
-addEventListener("resize",applyFit);
+addEventListener("resize", applyFit);
 
-function startVideo(){
-  unlockAudio.play().then(()=>{
-    video.muted = false;
-    video.currentTime = 0;
-    return video.play();
-  }).then(()=>{
+function startVideo() {
+  video.muted = false;
+  video.currentTime = 0;
+
+  video.play().then(() => {
     tapLayer.remove();
-  }).catch(e=>console.log("fail",e));
+  }).catch(e=>console.log(e));
 }
 
 tapLayer.addEventListener("click", startVideo);
 tapLayer.addEventListener("touchstart", startVideo);
 
-locationBtn.onclick = ()=>{
+locationBtn.onclick = () => {
   window.open(
-    "https://www.google.com/maps?q=8/43A, Thiruvattar - Colachel Rd, near Nangil Milk Plant, Kaduvetty, Mulagumoodu, Thiruvithamcode, Tamil Nadu 629167",
+    "https://maps.app.goo.gl/J7P1sr5ddDeCUzAQ6",
     "_blank"
   );
 };
