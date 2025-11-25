@@ -77,50 +77,51 @@
   <div class="button-container">
     <a class="btn" 
        href="https://maps.app.goo.gl/JJgTrtpMezjbQPsL9?g_st=aw" 
-       target="_blank"
-       aria-label="Open map for directions">
+       target="_blank">
       Get Direction 📍
     </a>
   </div>
 
 
 <script>
+/* -------- Dynamic Video Scaling -------- */
 
-  /* ===== DYNAMIC VIDEO SCALING ===== */
+const video = document.getElementById("mainVid");
 
-  const video = document.getElementById("mainVid");
+function adjustVideoFit() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
 
-  function adjustVideoFit() {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+  const vr = video.videoWidth / video.videoHeight;
+  const sr = vw / vh;
 
-    const videoRatio = video.videoWidth / video.videoHeight;
-    const screenRatio = vw / vh;
+  video.style.objectFit = (vr < sr) ? "contain" : "cover";
+}
 
-    if (videoRatio < screenRatio) {
-      video.style.objectFit = "contain";
-    } else {
-      video.style.objectFit = "cover";
-    }
+video.addEventListener("loadedmetadata", adjustVideoFit);
+window.addEventListener("resize", adjustVideoFit);
+
+
+
+/* -------- AUDIO ENABLE AFTER INTERACTION -------- */
+
+function enableAudio() {
+  video.muted = false;
+  video.currentTime = 0;
+  let playPromise = video.play();
+
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {});
   }
 
-  video.addEventListener("loadedmetadata", adjustVideoFit);
-  window.addEventListener("resize", adjustVideoFit);
+  window.removeEventListener("click", enableAudio);
+  window.removeEventListener("touchstart", enableAudio);
+  window.removeEventListener("scroll", enableAudio);
+}
 
-
-
-  /* ===== ENABLE SOUND AFTER FIRST INTERACTION ===== */
-
-  function enableAudio() {
-    video.muted = false;
-    video.play();
-    window.removeEventListener("click", enableAudio);
-    window.removeEventListener("touchstart", enableAudio);
-  }
-
-  window.addEventListener("click", enableAudio);
-  window.addEventListener("touchstart", enableAudio);
-
+window.addEventListener("click", enableAudio);
+window.addEventListener("touchstart", enableAudio);
+window.addEventListener("scroll", enableAudio);
 </script>
 
 </body>
