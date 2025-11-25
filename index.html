@@ -28,7 +28,7 @@
       z-index: 0;
       transition: all 0.4s ease;
       background: black;
-      object-fit: cover; /* default */
+      object-fit: cover;
     }
 
     .button-container {
@@ -70,9 +70,8 @@
 </head>
 <body>
 
-  <video autoplay muted loop playsinline preload="auto">
+  <video id="mainVid" autoplay muted playsinline loop preload="auto">
     <source src="engagement_video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
   </video>
 
   <div class="button-container">
@@ -86,7 +85,10 @@
 
 
 <script>
-  const video = document.querySelector("video");
+
+  /* ===== DYNAMIC VIDEO SCALING ===== */
+
+  const video = document.getElementById("mainVid");
 
   function adjustVideoFit() {
     const vw = window.innerWidth;
@@ -96,16 +98,29 @@
     const screenRatio = vw / vh;
 
     if (videoRatio < screenRatio) {
-      // video is taller shape than screen
       video.style.objectFit = "contain";
     } else {
-      // video is wider shape than screen
       video.style.objectFit = "cover";
     }
   }
 
   video.addEventListener("loadedmetadata", adjustVideoFit);
   window.addEventListener("resize", adjustVideoFit);
+
+
+
+  /* ===== ENABLE SOUND AFTER FIRST INTERACTION ===== */
+
+  function enableAudio() {
+    video.muted = false;
+    video.play();
+    window.removeEventListener("click", enableAudio);
+    window.removeEventListener("touchstart", enableAudio);
+  }
+
+  window.addEventListener("click", enableAudio);
+  window.addEventListener("touchstart", enableAudio);
+
 </script>
 
 </body>
