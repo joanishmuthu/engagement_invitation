@@ -6,123 +6,65 @@
   <title>Engagement Invitation</title>
 
   <style>
-    * {
+    body, html {
+      width: 100%;
+      height: 100%;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: "Poppins", sans-serif;
-      background-color: black;
+      background: black;
       overflow: hidden;
     }
 
     video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    #tapScreen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
-      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: black;
-      object-fit: cover;
-    }
-
-    .button-container {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      color: white;
+      font-size: 28px;
+      font-family: sans-serif;
       text-align: center;
-      z-index: 1;
-    }
-
-    .btn {
-      background-color: rgba(255, 255, 255, 0.85);
-      color: #000;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      padding: 14px 32px;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
-    }
-
-    .btn:hover {
-      background-color: #000;
-      color: #fff;
-      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 600px) {
-      .btn {
-        font-size: 1rem;
-        padding: 12px 24px;
-      }
+      cursor: pointer;
     }
   </style>
-
 </head>
+
 <body>
 
-  <video id="mainVid" autoplay muted playsinline loop preload="auto">
-    <source src="engagement_video.mp4" type="video/mp4" />
+  <div id="tapScreen">Tap anywhere to start</div>
+
+  <video id="video" preload="auto" playsinline>
+    <source src="engagement_video.mp4" type="video/mp4">
   </video>
 
-  <div class="button-container">
-    <a class="btn" 
-       href="https://maps.app.goo.gl/JJgTrtpMezjbQPsL9?g_st=aw" 
-       target="_blank">
-      Get Direction 📍
-    </a>
-  </div>
+  <script>
+    const tapScreen = document.getElementById("tapScreen");
+    const video = document.getElementById("video");
 
+    const startVideo = () => {
+      tapScreen.style.display = "none";
+      video.style.display = "block";
 
-<script>
-/* -------- Dynamic Video Scaling -------- */
+      video.play().catch(err => {
+        console.log("Playback failed:", err);
+      });
+    };
 
-const video = document.getElementById("mainVid");
-
-function adjustVideoFit() {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-
-  const vr = video.videoWidth / video.videoHeight;
-  const sr = vw / vh;
-
-  video.style.objectFit = (vr < sr) ? "contain" : "cover";
-}
-
-video.addEventListener("loadedmetadata", adjustVideoFit);
-window.addEventListener("resize", adjustVideoFit);
-
-
-
-/* -------- AUDIO ENABLE AFTER INTERACTION -------- */
-
-function enableAudio() {
-  video.muted = false;
-  video.currentTime = 0;
-  let playPromise = video.play();
-
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {});
-  }
-
-  window.removeEventListener("click", enableAudio);
-  window.removeEventListener("touchstart", enableAudio);
-  window.removeEventListener("scroll", enableAudio);
-}
-
-window.addEventListener("click", enableAudio);
-window.addEventListener("touchstart", enableAudio);
-window.addEventListener("scroll", enableAudio);
-</script>
+    tapScreen.addEventListener("click", startVideo);
+    tapScreen.addEventListener("touchstart", startVideo);
+  </script>
 
 </body>
 </html>
