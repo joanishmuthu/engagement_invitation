@@ -50,9 +50,7 @@
       touch-action: manipulation;
     }
 
-    /********************************
-       COUNTDOWN + RIBBON + FLIP
-    ********************************/
+    /* TIMER + RIBBON + FLIP */
     #timer {
       position: fixed;
       left: 50%;
@@ -69,6 +67,7 @@
       box-shadow: 0 0 18px rgba(0,0,0,0.6);
       animation: flipIn 1s forwards ease-out;
       transform-origin: bottom;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
     }
 
     #timer:before,
@@ -109,9 +108,7 @@
     }
 
 
-    /*******************************
-        BUTTON
-    ********************************/
+    /* BUTTON */
     #directionsBtn {
       position: fixed;
       left: 50%;
@@ -138,13 +135,10 @@
     }
 
 
-    /********************************
-         WHITE DOVES FLOATING
-    ********************************/
-
+    /* DOVE ANIMATION */
     .dove {
       position: fixed;
-      width: 90px;
+      width: 80px;
       opacity: 0.85;
       z-index: 3;
       animation: drift 18s linear infinite;
@@ -170,7 +164,6 @@
 
   </style>
 </head>
-
 <body>
 
   <div id="videoContainer">
@@ -179,10 +172,18 @@
     </video>
   </div>
 
-  <!-- White dove PNGs -->
-  <img src="https://i.imgur.com/zyxCSiZ.png" class="dove d1" style="left:5%;"/>
-  <img src="https://i.imgur.com/zyxCSiZ.png" class="dove d2" style="left:50%;"/>
-  <img src="https://i.imgur.com/zyxCSiZ.png" class="dove d3" style="left:82%;"/>
+  <!-- INLINE SVG DOVES -->
+  <svg class="dove d1" style="left:5%;" viewBox="0 0 64 64">
+    <path fill="white" d="M2 33s12 0 19-9c0 0 .8 11 14 16 0 0-1-6 3-12 0 0 5 9 20 12 0 0-7 8-22 7-12-.5-24-8-34-14z"/>
+  </svg>
+
+  <svg class="dove d2" style="left:45%;" viewBox="0 0 64 64">
+    <path fill="white" d="M2 33s12 0 19-9c0 0 .8 11 14 16 0 0-1-6 3-12 0 0 5 9 20 12 0 0-7 8-22 7-12-.5-24-8-34-14z"/>
+  </svg>
+
+  <svg class="dove d3" style="left:80%;" viewBox="0 0 64 64">
+    <path fill="white" d="M2 33s12 0 19-9c0 0 .8 11 14 16 0 0-1-6 3-12 0 0 5 9 20 12 0 0-7 8-22 7-12-.5-24-8-34-14z"/>
+  </svg>
 
   <div id="timer"></div>
 
