@@ -33,7 +33,6 @@
       background: black;
     }
 
-    /* invisible layer to detect first gesture */
     #tapLayer {
       position: fixed;
       inset: 0;
@@ -42,7 +41,7 @@
       touch-action: manipulation;
     }
 
-    /* GET LOCATION BUTTON */
+    /* desktop default button style */
     #locationBtn {
       position: fixed;
       bottom: 30px;
@@ -67,6 +66,22 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
+
+
+    /* MOBILE OVERRIDE */
+    @media (max-width: 820px) {
+
+      #locationBtn {
+        position: fixed;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        font-size: 26px;
+        padding: 22px 38px;
+        border-radius: 18px;
+      }
+    }
+
   </style>
 </head>
 
@@ -86,7 +101,6 @@
     const video = document.getElementById("video");
     const locationBtn = document.getElementById("locationBtn");
 
-    /* DEVICE SCALING */
     function isMobileDevice() {
       return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
           || window.innerWidth <= 820;
@@ -94,16 +108,16 @@
 
     function applyScalingMode() {
       if (isMobileDevice()) {
-        video.style.objectFit = "cover";      // fullscreen on mobile
+        video.style.objectFit = "cover";
       } else {
-        video.style.objectFit = "contain";    // letterbox on desktop
+        video.style.objectFit = "contain";
       }
     }
 
     applyScalingMode();
     window.addEventListener("resize", applyScalingMode);
 
-    /* AUDIO UNLOCK */
+
     function startVideo() {
       video.muted = false;
       video.currentTime = 0;
@@ -116,10 +130,10 @@
     tapLayer.addEventListener("click", startVideo);
     tapLayer.addEventListener("touchstart", startVideo);
 
-    /* MAP BUTTON LINK */
+
     locationBtn.onclick = () => {
       window.open(
-        "https://maps.app.goo.gl/J7P1sr5ddDeCUzAQ6",
+        "https://www.google.com/maps?q=8/43A, Thiruvattar - Colachel Rd, near Nangil Milk Plant, Kaduvetty, Mulagumoodu, Thiruvithamcode, Tamil Nadu 629167",
         "_blank"
       );
     };
