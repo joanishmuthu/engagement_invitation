@@ -42,7 +42,6 @@
       }
     }
 
-
     #interactionOverlay {
       position: fixed;
       inset: 0;
@@ -50,39 +49,6 @@
       background: transparent;
       touch-action: manipulation;
     }
-
-
-    /* SIMPLE TIMER + FLIP ONLY */
-    #timer {
-      position: fixed;
-      left: 50%;
-      bottom: 90px;
-      transform: translateX(-50%) rotateX(90deg);
-      z-index: 10;
-      font-size: 26px;
-      font-family: sans-serif;
-      color: white;
-      text-shadow: 0px 0px 10px black;
-      opacity: 0;
-      animation: flipIn 1s forwards ease-out;
-      transform-origin: bottom;
-    }
-
-    @keyframes flipIn {
-      0% {
-        opacity: 0;
-        transform: translateX(-50%) rotateX(90deg);
-      }
-      50% {
-        opacity: .5;
-        transform: translateX(-50%) rotateX(40deg);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(-50%) rotateX(0deg);
-      }
-    }
-
 
     /* BIGGER BUTTON */
     #directionsBtn {
@@ -121,8 +87,6 @@
     </video>
   </div>
 
-  <div id="timer"></div>
-
   <button id="directionsBtn">Get Directions📍</button>
 
   <div id="interactionOverlay"></div>
@@ -132,7 +96,6 @@
   const video = document.getElementById("video");
   const interactionOverlay = document.getElementById("interactionOverlay");
   const directionsBtn = document.getElementById("directionsBtn");
-  const timerDiv = document.getElementById("timer");
 
   let started = false;
 
@@ -157,29 +120,6 @@
     startVideoWithSound();
     window.open("https://maps.app.goo.gl/J7P1sr5ddDeCUzAQ6", "_blank");
   });
-
-
-  /* COUNTDOWN */
-  const target = new Date("2025-12-22T09:00:00");
-
-  setInterval(() => {
-
-    const now = new Date();
-    const diff = target - now;
-
-    if (diff <= 0) {
-      timerDiv.textContent = "Today is the day 🎉";
-      return;
-    }
-
-    const d = Math.floor(diff/(1000*60*60*24));
-    const h = Math.floor((diff/(1000*60*60))%24);
-    const m = Math.floor((diff/(1000*60))%60);
-    const s = Math.floor((diff/1000)%60);
-
-    timerDiv.textContent = `${d}d : ${h}h : ${m}m : ${s}s`;
-
-  }, 1000);
 
 </script>
 
