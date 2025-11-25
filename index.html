@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Engagement Invitation</title>
+
   <style>
     * {
       margin: 0;
@@ -15,7 +16,7 @@
       height: 100%;
       font-family: "Poppins", sans-serif;
       background-color: black;
-      overflow: auto;
+      overflow: hidden;
     }
 
     video {
@@ -24,8 +25,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
       z-index: 0;
+      transition: all 0.4s ease;
+      background: black;
+      object-fit: cover; /* default */
     }
 
     .button-container {
@@ -63,6 +66,7 @@
       }
     }
   </style>
+
 </head>
 <body>
 
@@ -79,6 +83,30 @@
       Get Direction 📍
     </a>
   </div>
+
+
+<script>
+  const video = document.querySelector("video");
+
+  function adjustVideoFit() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const videoRatio = video.videoWidth / video.videoHeight;
+    const screenRatio = vw / vh;
+
+    if (videoRatio < screenRatio) {
+      // video is taller shape than screen
+      video.style.objectFit = "contain";
+    } else {
+      // video is wider shape than screen
+      video.style.objectFit = "cover";
+    }
+  }
+
+  video.addEventListener("loadedmetadata", adjustVideoFit);
+  window.addEventListener("resize", adjustVideoFit);
+</script>
 
 </body>
 </html>
