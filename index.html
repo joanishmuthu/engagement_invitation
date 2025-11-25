@@ -6,41 +6,32 @@
   <title>Engagement Invitation</title>
 
   <style>
-    body, html {
-      width: 100%;
-      height: 100%;
+    html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      height: 100%;
       background: black;
       overflow: hidden;
     }
 
     video {
-      width: 100%;
-      height: 100%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 1;
     }
 
-    #tapScreen {
+    /* transparent clickable layer */
+    #tapLayer {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.75);
-      color: white;
-      font-size: 28px;
-      font-family: sans-serif;
-      text-align: center;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
+      inset: 0;
+      z-index: 10;
     }
   </style>
 </head>
@@ -51,26 +42,25 @@
     <source src="engagement_video.mp4" type="video/mp4">
   </video>
 
-  <div id="tapScreen">Tap to Start</div>
+  <!-- invisible layer to catch the FIRST user gesture -->
+  <div id="tapLayer"></div>
 
   <script>
-    const tapScreen = document.getElementById("tapScreen");
+    const tapLayer = document.getElementById("tapLayer");
     const video = document.getElementById("video");
 
-    // Start playing (muted) in background to avoid initial black frame
-    video.play().catch(() => {
-      /* ignore autoplay block — it's muted so it usually works */
-    });
+    // Start muted autoplay immediately, avoid black frame
+    video.play().catch(()=>{});
 
-    const startVideo = () => {
-      tapScreen.style.display = "none";
-      video.muted = false;     // unmute after user gesture
-      video.currentTime = 0;   // restart from beginning
-      video.play();            // play with audio
+    const enableAudio = () => {
+      tapLayer.remove();      // remove layer fully
+      video.muted = false;    // unmute
+      video.currentTime = 0;  
+      video.play();
     };
 
-    tapScreen.addEventListener("click", startVideo);
-    tapScreen.addEventListener("touchstart", startVideo);
+    tapLayer.addEventListener("click", enableAudio);
+    tapLayer.addEventListener("touchstart", enableAudio);
   </script>
 
 </body>
