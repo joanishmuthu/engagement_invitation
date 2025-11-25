@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta-name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Engagement Invitation</title>
 
   <style>
@@ -19,7 +19,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 1;
     }
 
     #tapScreen {
@@ -31,35 +34,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: black;
+      background: rgba(0,0,0,0.75);
       color: white;
       font-size: 28px;
       font-family: sans-serif;
       text-align: center;
       cursor: pointer;
+      backdrop-filter: blur(4px);
     }
   </style>
 </head>
 
 <body>
 
-  <div id="tapScreen">Tap anywhere to start</div>
-
-  <video id="video" preload="auto" playsinline>
+  <video id="video" preload="auto" playsinline muted loop>
     <source src="engagement_video.mp4" type="video/mp4">
   </video>
+
+  <div id="tapScreen">Tap to Start</div>
 
   <script>
     const tapScreen = document.getElementById("tapScreen");
     const video = document.getElementById("video");
 
+    // Start playing (muted) in background to avoid initial black frame
+    video.play().catch(() => {
+      /* ignore autoplay block — it's muted so it usually works */
+    });
+
     const startVideo = () => {
       tapScreen.style.display = "none";
-      video.style.display = "block";
-
-      video.play().catch(err => {
-        console.log("Playback failed:", err);
-      });
+      video.muted = false;     // unmute after user gesture
+      video.currentTime = 0;   // restart from beginning
+      video.play();            // play with audio
     };
 
     tapScreen.addEventListener("click", startVideo);
