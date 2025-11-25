@@ -134,34 +134,6 @@
       100% { transform: translateX(-50%) scale(1); }
     }
 
-
-    /* DOVE ANIMATION */
-    .dove {
-      position: fixed;
-      width: 80px;
-      opacity: 0.85;
-      z-index: 3;
-      animation: drift 18s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes drift {
-      0%   { transform: translateY(120vh) translateX(-10vw) rotate(0deg); }
-      100% { transform: translateY(-20vh) translateX(40vw) rotate(15deg); }
-    }
-
-    .d2 {
-      animation-duration: 22s;
-      animation-delay: -6s;
-      transform: scale(0.8);
-    }
-
-    .d3 {
-      animation-duration: 27s;
-      animation-delay: -12s;
-      transform: scale(1.15);
-    }
-
   </style>
 </head>
 <body>
@@ -171,19 +143,6 @@
       <source src="engagement_video.mp4" type="video/mp4">
     </video>
   </div>
-
-  <!-- INLINE SVG DOVES -->
-  <svg class="dove d1" style="left:5%;" viewBox="0 0 64 64">
-    <path fill="white" d="M2 33s12 0 19-9c0 0 .8 11 14 16 0 0-1-6 3-12 0 0 5 9 20 12 0 0-7 8-22 7-12-.5-24-8-34-14z"/>
-  </svg>
-
-  <svg class="dove d2" style="left:45%;" viewBox="0 0 64 64">
-    <path fill="white" d="M2 33s12 0 19-9c0 0 .8 11 14 16 0 0-1-6 3-12 0 0 5 9 20 12 0 0-7 8-22 7-12-.5-24-8-34-14z"/>
-  </svg>
-
-  <svg class="dove d3" style="left:80%;" viewBox="0 0 64 64">
-    <path fill="white" d="M2 33s12 0 19-9c0 0 .8 11 14 16 0 0-1-6 3-12 0 0 5 9 20 12 0 0-7 8-22 7-12-.5-24-8-34-14z"/>
-  </svg>
 
   <div id="timer"></div>
 
