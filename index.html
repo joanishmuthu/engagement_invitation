@@ -20,17 +20,31 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       background: black;
+      overflow: hidden;
     }
 
     video {
       width: 100vw;
       height: 100vh;
-      object-fit: cover;
       position: absolute;
       top: 0;
       left: 0;
+      background: black;
+    }
+
+    /* MOBILE — cover full screen no bars */
+    @media (max-width: 820px) {
+      video {
+        object-fit: cover;
+      }
+    }
+
+    /* DESKTOP — DO NOT stretch, allow letterbox */
+    @media (min-width: 821px) {
+      video {
+        object-fit: contain;
+      }
     }
 
     #tapLayer {
@@ -56,15 +70,14 @@
     const tapLayer = document.getElementById("tapLayer");
     const video = document.getElementById("video");
 
-    // start muted autoplay immediately (prevents black start frame)
+    // prevent initial black frame
     video.play().catch(()=>{});
 
     function enableAudio() {
       video.muted = false;
       video.currentTime = 0;
 
-      // iPhone specific fix
-      video.play().then(()=> {
+      video.play().then(() => {
         tapLayer.remove();
       }).catch(()=>{});
     }
