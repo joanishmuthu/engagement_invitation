@@ -15,107 +15,119 @@
       background: black;
     }
 
+    /* Video fills the screen area */
     #videoContainer {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: black;
       overflow: hidden;
+      background: black;
+      z-index: 0;
     }
 
-    video {
+    #video {
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
+      object-fit: contain; /* default: letterbox for laptops/desktops */
       background: black;
     }
 
-    #tapLayer {
+    /* Mobile: fill screen nicely (portrait), can crop sides */
+    @media (max-width: 820px) {
+      #video {
+        object-fit: cover;
+      }
+    }
+
+    /* Transparent overlay to catch first user interaction */
+    #interactionOverlay {
       position: fixed;
       inset: 0;
-      z-index: 9998;
+      z-index: 1;
       background: transparent;
       touch-action: manipulation;
     }
 
-    /* BUTTON (same size everywhere) */
-    #locationBtn {
+    /* Directions button: bottom center, hovering over video */
+    #directionsBtn {
       position: fixed;
-      top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 99999;
-      background: rgba(255,255,255,0.9);
-      border-radius: 18px;
-      padding: 20px 38px;
-      font-size: 26px;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 2;
+      padding: 14px 26px;
+      border-radius: 16px;
+      border: none;
+      font-size: 18px;
       font-family: sans-serif;
       font-weight: bold;
-      color: black;
-      border: none;
       cursor: pointer;
+      color: #000;
+      background: rgba(255,255,255,0.9);
       backdrop-filter: blur(4px);
       animation: pulse 1.8s infinite ease-in-out;
     }
 
     @keyframes pulse {
-      0% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.08); }
-      100% { transform: translate(-50%, -50%) scale(1); }
+      0%   { transform: translateX(-50%) scale(1); }
+      50%  { transform: translateX(-50%) scale(1.06); }
+      100% { transform: translateX(-50%) scale(1); }
     }
-
   </style>
 </head>
-
 <body>
 
   <div id="videoContainer">
-    <video id="video" preload="auto" playsinline loop>
+    <video id="video" playsinline preload="auto" loop>
       <source src="engagement_video.mp4" type="video/mp4">
     </video>
   </div>
 
-  <button id="locationBtn">Get Location!📍</button>
-  <div id="tapLayer"></div>
+  <!-- Button floating over bottom center -->
+  <button id="directionsBtn">Get Directions📍</button>
 
-<script>
-const tapLayer = document.getElementById("tapLayer");
-const video = document.getElementById("video");
-const locationBtn = document.getElementById("locationBtn");
+  <!-- Invisible overlay to capture first tap/click to start audio -->
+  <div id="interactionOverlay"></div>
 
-function isMobile() {
-  return /Android|iPhone|iPad/i.test(navigator.userAgent) 
-         || window.innerWidth <= 820;
-}
+  <script>
+    const video = document.getElementById("video");
+    const directionsBtn = document.getElementById("directionsBtn");
+    const interactionOverlay = document.getElementById("interactionOverlay");
 
-function applyFit() {
-  video.style.objectFit = isMobile() ? "cover" : "contain";
-}
-applyFit();
-addEventListener("resize", applyFit);
+    let videoStarted = false;
 
-function startVideo() {
-  video.muted = false;
-  video.currentTime = 0;
+    function startVideoWithAudio() {
+      if (videoStarted) return;
+      videoStarted = true;
 
-  video.play().then(() => {
-    tapLayer.remove();
-  }).catch(e=>console.log(e));
-}
+      // Ensure we start from the beginning with sound
+      video.currentTime = 0;
+      video.muted = false;
 
-tapLayer.addEventListener("click", startVideo);
-tapLayer.addEventListener("touchstart", startVideo);
+      video.play().then(() => {
+        // Once video is successfully playing, we no longer need the overlay
+        interactionOverlay.style.display = "none";
+      }).catch(err => {
+        console.log("Video play failed:", err);
+        videoStarted = false; // allow retry
+      });
+    }
 
-locationBtn.onclick = () => {
-  window.open(
-    "https://maps.app.goo.gl/J7P1sr5ddDeCUzAQ6",
-    "_blank"
-  );
-};
-</script>
+    // Any tap/click on overlay starts video with audio
+    interactionOverlay.addEventListener("click", startVideoWithAudio);
+    interactionOverlay.addEventListener("touchstart", startVideoWithAudio, { passive: true });
+
+    // Clicking the directions button should also ensure video starts with audio,
+    // then open maps in a new tab.
+    directionsBtn.addEventListener("click", () => {
+      startVideoWithAudio();
+      window.open("https://maps.app.goo.gl/J7P1sr5ddDeCUzAQ6", "_blank");
+    });
+  </script>
 
 </body>
 </html>
